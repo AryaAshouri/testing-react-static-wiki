@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const asset = (path) => `${ import.meta.env.BASE_URL }${ path } `;
+const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
 function Cards() {
     const [selectedCard, setSelectedCard] = useState(null);
@@ -89,7 +89,12 @@ function Cards() {
                             alt={card.name}
                         />
 
-                        <div className="card-hover">
+                        <div
+                            className="card-hover"
+                            style={{
+                                backgroundImage: `url(${asset("pieces/cards/blank_card.png")})`
+                            }}
+                        >
                             <div className="card-title">
                                 <span>{card.name}</span>
                                 <img
@@ -105,12 +110,11 @@ function Cards() {
                                         alt="Attack"
                                     />
                                     <span>{card.attack}</span>
-
                                     <div className="progress">
                                         <div
                                             className="progress-fill"
                                             style={{
-                                                width: `${ card.attack }% `
+                                                width: `${card.attack}%`
                                             }}
                                         />
                                     </div>
@@ -122,12 +126,11 @@ function Cards() {
                                         alt="Health"
                                     />
                                     <span>{card.health}</span>
-
                                     <div className="progress">
                                         <div
                                             className="progress-fill"
                                             style={{
-                                                width: `${ card.health }% `
+                                                width: `${card.health}%`
                                             }}
                                         />
                                     </div>
@@ -139,12 +142,11 @@ function Cards() {
                                         alt="Knockback"
                                     />
                                     <span>{card.knockback}</span>
-
                                     <div className="progress">
                                         <div
                                             className="progress-fill"
                                             style={{
-                                                width: `${ (card.knockback / 3) * 100 }% `
+                                                width: `${(card.knockback / 3) * 100}%`
                                             }}
                                         />
                                     </div>
