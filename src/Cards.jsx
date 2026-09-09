@@ -1,81 +1,88 @@
 import { useState } from "react";
+import "./Cards.css";
 
-const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
+const asset = (path) => `${import.meta.env.BASE_URL}public/${path}`;
 
 function Cards() {
     const [selectedCard, setSelectedCard] = useState(null);
     const [previewType, setPreviewType] = useState("normal");
+    const [isClosing, setIsClosing] = useState(false);
 
     const cards = [
         {
             name: "Pawn",
             image: asset("pieces/cards/pawn_card.png"),
             classImage: asset("class/class1.png"),
-            attack: 20,
-            health: 50,
+            power: 15,
+            defense: 50,
             knockback: 1,
             normalVideo: asset("preview/normal/pawn.mp4"),
-            abilityVideo: asset("preview/ability/pawn.mp4")
+            abilityVideo: asset("preview/ability/pawn.mp4"),
         },
         {
             name: "King",
             image: asset("pieces/cards/king_card.png"),
             classImage: asset("class/class2.png"),
-            attack: 40,
-            health: 100,
-            knockback: 2,
+            power: 7,
+            defense: 100,
+            knockback: 3,
             normalVideo: asset("preview/normal/king.mp4"),
-            abilityVideo: asset("preview/ability/king.mp4")
+            abilityVideo: asset("preview/ability/king.mp4"),
         },
         {
             name: "Queen",
             image: asset("pieces/cards/queen_card.png"),
             classImage: asset("class/class1.png"),
-            attack: 90,
-            health: 80,
-            knockback: 3,
+            power: 12,
+            defense: 80,
+            knockback: 2,
             normalVideo: asset("preview/normal/queen.mp4"),
-            abilityVideo: asset("preview/ability/queen.mp4")
+            abilityVideo: asset("preview/ability/queen.mp4"),
         },
         {
             name: "Rook",
             image: asset("pieces/cards/rook_card.png"),
             classImage: asset("class/class2.png"),
-            attack: 70,
-            health: 90,
-            knockback: 2,
+            power: 9,
+            defense: 90,
+            knockback: 3,
             normalVideo: asset("preview/normal/rook.mp4"),
-            abilityVideo: asset("preview/ability/rook.mp4")
+            abilityVideo: asset("preview/ability/rook.mp4"),
         },
         {
             name: "Knight",
             image: asset("pieces/cards/knight_card.png"),
             classImage: asset("class/class3.png"),
-            attack: 60,
-            health: 60,
+            power: 13,
+            defense: 60,
             knockback: 2,
             normalVideo: asset("preview/normal/knight.mp4"),
-            abilityVideo: asset("preview/ability/knight.mp4")
+            abilityVideo: asset("preview/ability/knight.mp4"),
         },
         {
             name: "Bishop",
             image: asset("pieces/cards/bishop_card.png"),
             classImage: asset("class/class3.png"),
-            attack: 50,
-            health: 70,
-            knockback: 1,
+            power: 13,
+            defense: 75,
+            knockback: 2,
             normalVideo: asset("preview/normal/bishop.mp4"),
-            abilityVideo: asset("preview/ability/bishop.mp4")
-        }
+            abilityVideo: asset("preview/ability/bishop.mp4"),
+        },
     ];
 
     function openPreview(card) {
         setSelectedCard(card);
         setPreviewType("normal");
+        setIsClosing(false);
     }
 
     function closePreview() {
-        setSelectedCard(null);
+        setIsClosing(true);
+        setTimeout(() => {
+            setSelectedCard(null);
+            setIsClosing(false);
+        }, 450);
     }
 
     return (
@@ -83,71 +90,49 @@ function Cards() {
             <div id="cards-container">
                 {cards.map((card) => (
                     <div className="card-container" key={card.name}>
-                        <img
-                            className="card-image"
-                            src={card.image}
-                            alt={card.name}
-                        />
+                        <img className="card-image" src={card.image} alt={card.name} />
 
                         <div
                             className="card-hover"
                             style={{
-                                backgroundImage: `url(${asset("pieces/cards/blank_card.png")})`
+                                backgroundImage: `url(${asset("pieces/cards/blank_card.png")})`,
                             }}
                         >
                             <div className="card-title">
                                 <span>{card.name}</span>
-                                <img
-                                    src={card.classImage}
-                                    alt="class"
-                                />
+                                <img src={card.classImage} alt="class" />
                             </div>
 
                             <div className="stats">
                                 <div className="stat">
-                                    <img
-                                        src={asset("stat/attack.png")}
-                                        alt="Attack"
-                                    />
-                                    <span>{card.attack}</span>
+                                    <img src={asset("stat/attack.png")} alt="Power" />
+                                    <span>{card.power}</span>
                                     <div className="progress">
                                         <div
                                             className="progress-fill"
-                                            style={{
-                                                width: `${card.attack}%`
-                                            }}
+                                            style={{ width: `${(card.power / 20) * 100}%` }}
                                         />
                                     </div>
                                 </div>
 
                                 <div className="stat">
-                                    <img
-                                        src={asset("stat/health.png")}
-                                        alt="Health"
-                                    />
-                                    <span>{card.health}</span>
+                                    <img src={asset("stat/health.png")} alt="Defense" />
+                                    <span>{card.defense}</span>
                                     <div className="progress">
                                         <div
                                             className="progress-fill"
-                                            style={{
-                                                width: `${card.health}%`
-                                            }}
+                                            style={{ width: `${card.defense}%` }}
                                         />
                                     </div>
                                 </div>
 
                                 <div className="stat">
-                                    <img
-                                        src={asset("stat/knockback.png")}
-                                        alt="Knockback"
-                                    />
+                                    <img src={asset("stat/knockback.png")} alt="Knockback" />
                                     <span>{card.knockback}</span>
                                     <div className="progress">
                                         <div
                                             className="progress-fill"
-                                            style={{
-                                                width: `${(card.knockback / 3) * 100}%`
-                                            }}
+                                            style={{ width: `${(card.knockback / 3) * 100}%` }}
                                         />
                                     </div>
                                 </div>
@@ -165,12 +150,9 @@ function Cards() {
             </div>
 
             {selectedCard && (
-                <div className="popup-overlay">
-                    <div className="popup">
-                        <button
-                            className="close-button"
-                            onClick={closePreview}
-                        >
+                <div className={`popup-overlay ${isClosing ? "closing" : ""}`}>
+                    <div className={`popup ${isClosing ? "popup-closing" : ""}`}>
+                        <button className="close-button" onClick={closePreview}>
                             ×
                         </button>
 
@@ -191,22 +173,13 @@ function Cards() {
 
                         <div className="preview-buttons">
                             <button
-                                className={
-                                    previewType === "normal"
-                                        ? "active"
-                                        : ""
-                                }
+                                className={previewType === "normal" ? "active" : ""}
                                 onClick={() => setPreviewType("normal")}
                             >
                                 Normal
                             </button>
-
                             <button
-                                className={
-                                    previewType === "ability"
-                                        ? "active"
-                                        : ""
-                                }
+                                className={previewType === "ability" ? "active" : ""}
                                 onClick={() => setPreviewType("ability")}
                             >
                                 Ability

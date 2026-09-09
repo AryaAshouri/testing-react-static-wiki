@@ -1,0 +1,530 @@
+#cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+    padding: 45px 30px;
+    box-sizing: border-box;
+}
+
+.card-container {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 10px;
+    animation: cardFloat 4s ease-in-out infinite;
+}
+
+.card-container:nth-child(1) {
+    animation-delay: -0.8s;
+}
+
+.card-container:nth-child(2) {
+    animation-delay: -2.1s;
+}
+
+.card-container:nth-child(3) {
+    animation-delay: -1.3s;
+}
+
+.card-container:nth-child(4) {
+    animation-delay: -3.2s;
+}
+
+.card-container:nth-child(5) {
+    animation-delay: -0.3s;
+}
+
+.card-container:nth-child(6) {
+    animation-delay: -2.7s;
+}
+
+@keyframes cardFloat {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    20% {
+        transform: translate3d(-2px, -3px, 0) rotate(-0.45deg);
+    }
+
+    40% {
+        transform: translate3d(1px, -8px, 0) rotate(0.6deg);
+    }
+
+    60% {
+        transform: translate3d(3px, -5px, 0) rotate(0.2deg);
+    }
+
+    80% {
+        transform: translate3d(-2px, -2px, 0) rotate(-0.5deg);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+}
+
+/* RARE HOLO / FOIL */
+.card-container:nth-child(2)::after,
+.card-container:nth-child(4)::after,
+.card-container:nth-child(5)::after {
+    content: "";
+    position: absolute;
+    inset: -60%;
+    z-index: 10;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 20%, rgba(255, 0, 90, 0.55) 32%, rgba(255, 180, 0, 0.55) 40%, rgba(0, 255, 190, 0.55) 48%, rgba(40, 130, 255, 0.55) 56%, rgba(190, 60, 255, 0.55) 64%, transparent 78%);
+    opacity: 0;
+    transform: translateX(-45%) rotate(12deg);
+    filter: saturate(1.5);
+    animation: holoFoil 60s ease-in-out infinite;
+}
+
+.card-container:nth-child(2)::after {
+    animation-delay: -7s;
+}
+
+.card-container:nth-child(4)::after {
+    animation-delay: -27s;
+}
+
+.card-container:nth-child(5)::after {
+    animation-delay: -47s;
+}
+
+@keyframes holoFoil {
+
+    0%,
+    98%,
+    100% {
+        opacity: 0;
+        transform: translateX(-45%) rotate(12deg);
+    }
+
+    98.3% {
+        opacity: 0.2;
+    }
+
+    98.7% {
+        opacity: 0.65;
+    }
+
+    99.1% {
+        opacity: 0.3;
+    }
+
+    99.6% {
+        opacity: 0;
+        transform: translateX(45%) rotate(12deg);
+    }
+}
+
+/* CARD */
+.card-image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.card-hover {
+    position: absolute;
+    inset: 0;
+    padding: 17px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-container:hover .card-hover {
+    opacity: 1;
+}
+
+/* NAME + CLASS */
+.card-title {
+    position: relative;
+    top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding-bottom: 7px;
+    color: #3b3f43;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    border-bottom: none;
+}
+
+.card-title::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 7.5%;
+    width: 85%;
+    border-bottom: 1px solid #555a5f;
+}
+
+.card-title img {
+    width: 31px;
+    height: 31px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 5px;
+}
+
+/* STATS */
+.stats {
+    position: relative;
+    top: 20px;
+    margin-top: 20px;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    transform: scale(1.04);
+    transform-origin: center center;
+}
+
+.stat {
+    display: grid;
+    grid-template-columns: 25px 28px 1fr;
+    align-items: center;
+    column-gap: 6px;
+}
+
+.stat>img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.stat>span {
+    width: 28px;
+    text-align: center;
+    color: #3b3f43;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+/* PROGRESS */
+.progress {
+    width: 80%;
+    height: 8px;
+    margin-left: -5px;
+    background: #858a8f;
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #3b3f43;
+    border-radius: 5px;
+}
+
+/* CARD PREVIEW BUTTON */
+.preview-button {
+    position: absolute;
+    bottom: 29px;
+    left: 32px;
+    right: auto;
+    width: calc((100% - 44px) * 0.9);
+    height: 32px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #3b3f43;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border 0.25s ease;
+}
+
+.preview-button:hover {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: none;
+}
+
+/* POPUP OVERLAY */
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(10, 11, 12, 0.82);
+    animation: overlayOpen 0.45s ease forwards;
+}
+
+.popup-overlay.closing {
+    animation: overlayClose 0.45s ease forwards;
+}
+
+@keyframes overlayOpen {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes overlayClose {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* POPUP */
+.popup {
+    position: relative;
+    width: min(800px, 92vw);
+    padding: 22px;
+    box-sizing: border-box;
+    background: #292d31;
+    border: 2px solid #111315;
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    animation: popupOpen 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.popup.popup-closing {
+    animation: popupClose 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes popupOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes popupClose {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+    }
+}
+
+/* CLOSE BUTTON */
+.close-button {
+    position: absolute;
+    top: -17px;
+    right: -17px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #111315;
+    border-radius: 50%;
+    background: #292d31;
+    color: #ffffff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.35s ease, color 0.35s ease;
+}
+
+.close-button:hover {
+    background: #ffffff;
+    color: #3b3f43;
+}
+
+/* VIDEO */
+.video-container {
+    width: 100%;
+    height: 430px;
+    background: #0d0f10;
+    border: 2px solid #111315;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 103%;
+    height: 103%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+/* POPUP BUTTONS */
+.preview-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 13px;
+}
+
+.preview-buttons button {
+    flex: 1;
+    height: 38px;
+    border: 2px solid #858a8f;
+    border-radius: 5px;
+    background: transparent;
+    color: #d9dcdf;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.preview-buttons button:hover,
+.preview-buttons button.active {
+    background: #d9dcdf;
+    color: #17191b;
+    border-color: #d9dcdf;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    #cards-container {
+        gap: 23px;
+        padding: 35px 15px;
+    }
+
+    .card-container {
+        width: fit-content;
+        height: fit-content;
+        border-radius: 10px;
+    }
+
+    .card-image {
+        border-radius: 10px;
+    }
+
+    .card-hover {
+        padding: 14px;
+        border-radius: 10px;
+    }
+
+    .card-title {
+        top: 20px;
+        font-size: 17px;
+        gap: 4px;
+    }
+
+    .card-title::after {
+        left: 7.5%;
+        width: 85%;
+    }
+
+    .card-title img {
+        width: 28px;
+        height: 28px;
+        border-radius: 5px;
+    }
+
+    .stats {
+        top: 20px;
+        margin-top: 17px;
+        margin-left: 10px;
+        gap: 3.5px;
+        transform: scale(1.04);
+    }
+
+    .stat {
+        grid-template-columns: 23px 26px 1fr;
+        column-gap: 5px;
+    }
+
+    .stat>img {
+        width: 23px;
+        height: 23px;
+        border-radius: 5px;
+    }
+
+    .stat>span {
+        width: 26px;
+        font-size: 12px;
+    }
+
+    .progress {
+        height: 7px;
+        border-radius: 5px;
+    }
+
+    .progress-fill {
+        border-radius: 5px;
+    }
+
+    .preview-button {
+        bottom: 28px;
+        left: 18px;
+        width: calc((100% - 36px) * 0.9);
+        height: 30px;
+        font-size: 11px;
+        border-radius: 5px;
+    }
+
+    .popup {
+        border-radius: 10px;
+    }
+
+    .close-button {
+        border-radius: 50%;
+    }
+
+    .video-container {
+        height: 300px;
+        border-radius: 10px;
+    }
+
+    .video-container video {
+        width: 104%;
+        height: 104%;
+        border-radius: 5px;
+    }
+
+    .preview-buttons button {
+        border-radius: 5px;
+    }
+}

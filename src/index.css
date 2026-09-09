@@ -1,150 +1,47 @@
-#cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    gap: 20px;
+:root {
+    --background: #e8e3d7;
+    --surface: #eeeae0;
+    --text: #292923;
+    --muted-text: #69665e;
+
+    --subtle-border: rgba(45, 44, 39, 0.14);
+
+    --button-background: rgba(255, 255, 255, 0.22);
+    --button-hover: rgba(255, 255, 255, 0.38);
+
+    --progress-background: rgba(45, 44, 39, 0.17);
+    --progress: #4d4b43;
 }
 
-.card-container {
-    position: relative;
-    width: 240px;
-    height: 360px;
+:root[data-theme="dark"] {
+    --background: #061522;
+    --surface: #0a1b2a;
+    --text: #e7e9e7;
+    --muted-text: #aeb8bf;
+
+    --subtle-border: rgba(210, 220, 230, 0.12);
+
+    --button-background: rgba(255, 255, 255, 0.055);
+    --button-hover: rgba(255, 255, 255, 0.11);
+
+    --progress-background: rgba(220, 225, 230, 0.14);
+
+    /* Same solid progress color in both themes */
+    --progress: #4d4b43;
 }
 
-.card-image {
-    width: 100%;
-    height: 100%;
-    display: block;
+html,
+body,
+#root {
+    margin: 0;
+    min-height: 100%;
+    background: var(--background);
+    color: var(--text);
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
 }
 
-.card-hover {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    padding: 20px;
-    box-sizing: border-box;
-    opacity: 0;
-    transition: opacity 0.15s;
-}
-
-.card-container:hover .card-hover {
-    opacity: 1;
-}
-
-.card-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.card-title img {
-    width: 40px;
-    height: 40px;
-}
-
-.stats {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.stat {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.stat>img {
-    width: 30px;
-    height: 30px;
-}
-
-.stat span {
-    width: 30px;
-}
-
-.progress {
-    flex: 1;
-    height: 12px;
-    background: #555;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: #fff;
-}
-
-.preview-button {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    height: 40px;
-    cursor: pointer;
-}
-
-.popup-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.popup {
-    position: relative;
-    width: 600px;
-    height: 400px;
-    background: #222;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-.video-container {
-    width: 100%;
-    height: 310px;
-    background: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.video-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.preview-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.preview-buttons button {
-    flex: 1;
-    height: 30px;
-    cursor: pointer;
-}
-
-.preview-buttons .active {
-    font-weight: bold;
+body {
+    background: var(--background);
 }
